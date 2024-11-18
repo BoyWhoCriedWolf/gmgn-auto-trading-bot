@@ -5,7 +5,7 @@ import { GmGnAiTrending } from "./gmgn-scrapper.type";
 const URL =
   "https://gmgn.ai/defi/quotation/v1/rank/sol/swaps/1m?orderby=open_timestamp&direction=desc&limit=20&filters[]=renounced&filters[]=frozen&min_liquidity=100000";
 
-const DELAY = 5000;
+const DELAY = 300000;
 
 export async function processGmGn() {
   const browser = await puppeteer.launch({ headless: false });
@@ -91,6 +91,7 @@ export async function processGmGn() {
           "price change percentage 1h",
           "Volume",
           "Market Cap",
+          "Liquidity",
         ],
         ...(trendItems ?? []).map((item) => [
           item?.id ?? "",
@@ -98,7 +99,7 @@ export async function processGmGn() {
           item?.price ?? "",
           item?.price_change_percent1h ?? "",
           item?.volume ?? "",
-          item?.market_cap ?? "",
+          item?.liquidity ?? "",
         ]),
       ],
     }); // Call the function to append data to Google Sheets
@@ -114,6 +115,7 @@ export async function processGmGn() {
         //   "price change percentage 1h",
         //   "Volume",
         //   "Market Cap",
+        //   "Liquidity",
         //   "Added At",
         //   // "Updated At",
 
@@ -141,6 +143,7 @@ export async function processGmGn() {
               item?.item?.price_change_percent1h ?? "",
               item?.item?.volume ?? "",
               item?.item?.market_cap ?? "",
+              item?.item?.liquidity ?? "",
               item?.created_at ?? "",
               // item?.updated_at ?? "",
               item?.origin_item?.price ?? "",
@@ -170,6 +173,7 @@ export async function processGmGn() {
         //   "price change percentage 1h",
         //   "Volume",
         //   "Market Cap",
+        //   "Liquidity",
         //   "Removed At",
         //   // "Updated At",
         // ],
@@ -185,6 +189,7 @@ export async function processGmGn() {
               item?.item?.price_change_percent1h ?? "",
               item?.item?.volume ?? "",
               item?.item?.market_cap ?? "",
+              item?.item?.liquidity ?? "",
               item?.created_at ?? "",
               // item?.updated_at ?? "",
             ];
@@ -202,6 +207,7 @@ export async function processGmGn() {
           "price change percentage 1h",
           "Volume",
           "Market Cap",
+          "Liquidity",
           "Added At",
           // "Updated At",
 
@@ -228,6 +234,7 @@ export async function processGmGn() {
             item?.item?.price_change_percent1h ?? "",
             item?.item?.volume ?? "",
             item?.item?.market_cap ?? "",
+            item?.item?.liquidity ?? "",
             item?.created_at ?? "",
             // item?.updated_at ?? "",
             item?.origin_item?.price ?? "",
